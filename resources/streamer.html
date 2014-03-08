@@ -1,0 +1,22 @@
+<script type="text/javascript">
+	var source = new EventSource("stream");
+	
+	if( typeof(EventSource) !== "undefined" ){
+		console.log("SSE supported");	
+	}
+
+	source.onopen = function(){
+		console.log("open");
+	};	
+
+	console.log("outside");
+
+	source.onmessage = function(evnt){
+		console.log("inside");
+		console.log(evnt);
+		document.getElementById("content").innerHTML=evnt.data;
+	};
+</script>
+
+<h1 id="content"> dude </h1>
+

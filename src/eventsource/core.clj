@@ -1,17 +1,17 @@
 (ns eventsource.core
   (:gen-class)
-  (:use org.httpkit.server))
+  (:use org.httpkit.server)
+  (:use clojure.java.io))
 
 (defn route [req]
   (case (:uri req)
     "/" {:status 200
         :headers {"Content-Type" "text/html"}
-        :body "<h1>Duuuude</h1>"}
-    "/hello" (with-channel req channel
+        :body (slurp (resource "streamer.html"))}
+    "/stream" (with-channel req channel
               (send! channel {:status 200
-              :headers {"Content-Type" "text/event-stream"}
-              :body "<h1>Hello</h1>"} false)
-              (while true (send! channel (read-line) false)))))
+              :headers {"Content-Type" "text/event-stream" "Cache-Control" "no-cache"}} false)
+              (while true (send! channel (str "data: " (read-line) "\n\n") false)))))
 
 (defn app [req]
   (println (req :uri))

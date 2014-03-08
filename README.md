@@ -1,36 +1,18 @@
 # eventsource
 
-FIXME: description
+Simple Server Side Events (SSE) implementation using http kit.
 
-## Installation
-
-Download from http://example.com/FIXME.
 
 ## Usage
 
-FIXME: explanation
+Build an executable jar with the following command.
 
-    $ java -jar eventsource-0.1.0-standalone.jar [args]
+    $ lein uberjar
 
-## Options
+Pipe output of some program to the service 
 
-FIXME: listing of options this app accepts.
+    $ some-program-that-dumps-into-stdout | java -jar eventsource-0.1.0-SNAPSHOT-standalone.jar
 
-## Examples
+Access the event stream at http://localhost:8080/hello
 
-...
 
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
-
-## License
-
-Copyright © 2014 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
